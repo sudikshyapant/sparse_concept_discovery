@@ -2,7 +2,7 @@
 
 Reimplements [LGMD](https://arxiv.org/abs/2412.06093) (Language-Guided Matrix Decomposition) using [SpLiCE](https://arxiv.org/abs/2402.10376) instead of LGMD's original per-class LLM vocabulary + CLIP occlusion. The idea: factorize a CNN's spatial activations `A ≈ S Wᵀ`, where `S` is a fixed, sparse, non-negative, language-grounded coefficient matrix from SpLiCE, and `W` is the learned concept basis.
 
-Runs end-to-end on 3 Imagenette classes with a pretrained ResNet18 backbone — sized to fit Google Colab Pro's 8GB RAM tier.
+Runs end-to-end on 3 Imagenette classes with a pretrained ResNet18 backbone that can be computed on google colab pro.
 
 ## How it works
 
