@@ -23,21 +23,6 @@ pip install -r requirements.txt
 jupyter notebook poc.ipynb
 ```
 
-## Project layout
-
-```
-src/
-  config.py          # all settings (classes, paths, hyperparameters)
-  data_utils.py       # downloads Imagenette, builds per-class train/val splits
-  backbone_utils.py   # ResNet18 encoder + classifier head
-  clip_grid.py         # 4x4 grid-crop CLIP encoding
-  splice_utils.py      # wraps the vendored SpLiCE solver
-  lgmd.py               # basis learning (training) + coefficient estimation (inference)
-  evaluate.py            # reconstruction error + predictive preservation
-  plotting.py             # concept heatmap visualizations
-third_party/splice/      # vendored official SpLiCE repo
-poc.ipynb                 # main notebook
-```
 
 ## Output
 
