@@ -33,29 +33,17 @@ class SpliceEncoder:
             vocabulary=CONFIG["splice_vocab"],
             vocabulary_size=CONFIG["splice_vocab_size"],
             l1_penalty=CONFIG["splice_l1_penalty"],
-            solver=CONFIG["splice_solver"],
             return_weights=True,
-            return_cosine=False,
             device=device,
-            download_root=CONFIG["external_cache_dir"] + "/splice",
         )
-        # We feed pre-computed CLIP grid embeddings, not raw images, so disable the
-        # internal clip.encode_image() call path inside SPLICE.encode_image().
-        self.model.clip = None
-        self.model.eval()
-
-        self.vocab = splice_lib.get_vocabulary(
-            CONFIG["splice_vocab"],
-            CONFIG["splice_vocab_size"],
-            download_root=CONFIG["external_cache_dir"] + "/splice",
-        )
+        self.vocab = self.model.vocabulary
 
     @torch.no_grad()
     def encode(self, clip_embeddings):
         """clip_embeddings: (n, d) L2-normalized CLIP embeddings -> S: (n, vocab_size)
         non-negative sparse weights.
         """
-        return self.model.encode_image(clip_embeddings.to(self.device)).cpu()
+        return self.model.decompose(clip_embeddings.to(self.device)).cpu()
 
     def concept_name(self, concept_idx):
         return self.vocab[concept_idx]
